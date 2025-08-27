@@ -1,0 +1,77 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  min-height: calc(100vh - 120px);
+  background-color: #f8f9fa;
+}
+
+.inquiry-card {
+  max-width: 600px;
+  width: 100%;
+  margin: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.inquiry-form {
+  padding: 1rem 0;
+}
+
+.field {
+  margin-bottom: 1.5rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.submit-button {
+  min-width: 200px;
+  height: 48px;
+  font-size: 16px;
+}
+
+/* Error styling */
+.ng-invalid.ng-touched {
+  border-color: #e74c3c !important;
+}
+
+.p-error {
+  display: block;
+  margin-top: 0.25rem;
+  color: #e74c3c;
+  font-size: 0.875rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 1rem;
+  }
+  
+  .inquiry-card {
+    margin: 0;
+  }
+  
+  .submit-button {
+    width: 100%;
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .inquiry-form {
+  text-align: right;
+}
+
+[dir="rtl"] .formgrid {
+  direction: rtl;
+}

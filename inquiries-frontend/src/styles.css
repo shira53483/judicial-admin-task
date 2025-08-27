@@ -1,0 +1,97 @@
+/* PrimeNG Theme */
+@import "primeng/resources/themes/saga-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', 'Arial Hebrew', 'Arial', sans-serif;
+  direction: rtl;
+}
+
+/* Hebrew Font Support */
+body {
+  font-family: 'Segoe UI', 'Arial Hebrew', 'Arial', sans-serif;
+  line-height: 1.6;
+}
+
+/* RTL Support for PrimeNG */
+.p-dropdown-panel {
+  text-align: right;
+}
+
+.p-dropdown-item {
+  text-align: right;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  text-align: right;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  text-align: right;
+}
+
+.p-inputtext {
+  text-align: right;
+}
+
+.p-inputtextarea {
+  text-align: right;
+}
+
+/* Custom utility classes */
+.text-center {
+  text-align: center !important;
+}
+
+.w-full {
+  width: 100% !important;
+}
+
+/* Success/Error styling for toasts */
+.p-toast .p-toast-message.p-toast-message-success {
+  background: #10B981;
+}
+
+.p-toast .p-toast-message.p-toast-message-error {
+  background: #EF4444;
+}
+
+/* Print styles */
+@media print {
+  .app-header, .app-footer {
+    display: none;
+  }
+  
+  .reports-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .formgrid > .col-12 {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Custom PrimeNG overrides for better RTL */
+[dir="rtl"] .p-dropdown .p-dropdown-trigger {
+  right: auto;
+  left: 0.75rem;
+}
+
+[dir="rtl"] .p-button .p-button-icon-left {
+  margin-left: 0.25rem;
+  margin-right: 0;
+}

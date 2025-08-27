@@ -1,0 +1,32 @@
+<div class="app-container" dir="rtl">
+  <!-- Header -->
+  <p-toolbar styleClass="app-header">
+    <div class="p-toolbar-group-start">
+      <h2 class="app-title">{{title}}</h2>
+    </div>
+    <div class="p-toolbar-group-end">
+      <p-button 
+        label="פנייה חדשה" 
+        icon="pi pi-plus" 
+        styleClass="p-button-text"
+        routerLink="/form">
+      </p-button>
+      <p-button 
+        label="דוחות" 
+        icon="pi pi-chart-bar" 
+        styleClass="p-button-text"
+        routerLink="/reports">
+      </p-button>
+    </div>
+  </p-toolbar>
+
+  <!-- Main Content -->
+  <main class="app-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>&copy; {{getCurrentYear()}} הנהלת בתי המשפט. כל הזכויות שמורות.</p>
+  </footer>
+</div>

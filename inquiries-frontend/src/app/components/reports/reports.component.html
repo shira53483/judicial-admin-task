@@ -1,0 +1,117 @@
+<div class="reports-container">
+  <p-card header="דוח פניות חודשי" subheader="סטטיסטיקות והשוואות לפי מחלקות" styleClass="reports-card">
+    
+    <!-- Date Selection -->
+    <div class="date-selection">
+      <div class="field">
+        <label for="year">שנה</label>
+        <p-dropdown 
+          [options]="years" 
+          [(ngModel)]="selectedYear"
+          (onChange)="onDateChange()"
+          optionLabel="label" 
+          optionValue="value"
+          class="year-dropdown">
+        </p-dropdown>
+      </div>
+
+      <div class="field">
+        <label for="month">חודש</label>
+        <p-dropdown 
+          [options]="months" 
+          [(ngModel)]="selectedMonth"
+          (onChange)="onDateChange()"
+          optionLabel="label" 
+          optionValue="value"
+          class="month-dropdown">
+        </p-dropdown>
+      </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading" class="loading-container">
+      <p-progressSpinner></p-progressSpinner>
+      <p>טוען נתונים...</p>
+    </div>
+
+    <!-- Chart -->
+    <div *ngIf="!isLoading && reports.length > 0" class="chart-container">
+      <p-chart 
+        type="bar" 
+        [data]="chartData" 
+        [options]="chartOptions"
+        width="100%" 
+        height="400px">
+      </p-chart>
+    </div>
+
+    <!-- Data Table -->
+    <div *ngIf="!isLoading && reports.length > 0" class="table-container">
+      <p-table [value]="reports" styleClass="p-datatable-striped" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>מחלקה</th>
+            <th class="text-center">חודש נוכחי</th>
+            <th class="text-center">חודש קודם</th>
+            <th class="text-center">שנה שעברה</th>
+            <th class="text-center">שינוי מחודש קודם</th>
+            <th class="text-center">% שינוי</th>
+          </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="body" let-report>
+          <tr>
+            <td>{{report.departmentName}}</td>
+            <td class="text-center">
+              <p-tag 
+                [value]="report.currentMonthCount.toString()" 
+                severity="info"
+                styleClass="count-badge">
+              </p-tag>
+            </td>
+            <td class="text-center">
+              <p-tag 
+                [value]="report.previousMonthCount.toString()" 
+                severity="warning"
+                styleClass="count-badge">
+              </p-tag>
+            </td>
+            <td class="text-center">
+              <p-tag 
+                [value]="report.lastYearCount.toString()" 
+                severity="success"
+                styleClass="count-badge">
+              </p-tag>
+            </td>
+            <td class="text-center">
+              <div class="change-indicator" [ngClass]="getChangeClass(report.diffFromPreviousMonth)">
+                <i [class]="getChangeIcon(report.diffFromPreviousMonth)"></i>
+                <span>{{report.diffFromPreviousMonth > 0 ? '+' : ''}}{{report.diffFromPreviousMonth}}</span>
+              </div>
+            </td>
+            <td class="text-center">
+              <div *ngIf="report.percentChangeFromPreviousMonth !== null" 
+                   class="change-indicator" 
+                   [ngClass]="getChangeClass(report.percentChangeFromPreviousMonth!)">
+                <span>{{report.percentChangeFromPreviousMonth! > 0 ? '+' : ''}}{{report.percentChangeFromPreviousMonth | number:'1.1-1'}}%</span>
+              </div>
+              <div *ngIf="report.percentChangeFromPreviousMonth === null" class="no-data">
+                -
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <!-- No Data Message -->
+    <div *ngIf="!isLoading && reports.length === 0" class="no-data-container">
+      <i class="pi pi-chart-bar no-data-icon"></i>
+      <h3>אין נתונים להציג</h3>
+      <p>לא נמצאו פניות עבור התקופה שנבחרה</p>
+    </div>
+
+  </p-card>
+</div>
+
+<p-toast></p-toast>

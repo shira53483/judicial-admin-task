@@ -1,0 +1,115 @@
+<div class="form-container">
+  <p-card header="טופס פנייה חדשה" subheader="אנא מלאו את כל הפרטים הנדרשים" styleClass="inquiry-card">
+    <form [formGroup]="inquiryForm" (ngSubmit)="onSubmit()" class="inquiry-form">
+      
+      <!-- Full Name -->
+      <div class="field">
+        <label for="fullName">שם מלא *</label>
+        <input 
+          pInputText 
+          id="fullName" 
+          formControlName="fullName" 
+          placeholder="הכנס שם מלא"
+          class="w-full"
+          [class.ng-invalid]="inquiryForm.get('fullName')?.invalid && inquiryForm.get('fullName')?.touched"
+        />
+        <small 
+          class="p-error" 
+          *ngIf="inquiryForm.get('fullName')?.invalid && inquiryForm.get('fullName')?.touched">
+          {{getErrorMessage('fullName')}}
+        </small>
+      </div>
+
+      <!-- Phone & Email Row -->
+      <div class="formgrid grid">
+        <div class="field col-12 md:col-6">
+          <label for="phone">טלפון *</label>
+          <input 
+            pInputText 
+            id="phone" 
+            formControlName="phone" 
+            placeholder="050-1234567"
+            class="w-full"
+            [class.ng-invalid]="inquiryForm.get('phone')?.invalid && inquiryForm.get('phone')?.touched"
+          />
+          <small 
+            class="p-error" 
+            *ngIf="inquiryForm.get('phone')?.invalid && inquiryForm.get('phone')?.touched">
+            {{getErrorMessage('phone')}}
+          </small>
+        </div>
+
+        <div class="field col-12 md:col-6">
+          <label for="email">אימייל *</label>
+          <input 
+            pInputText 
+            id="email" 
+            formControlName="email" 
+            placeholder="example@email.com"
+            type="email"
+            class="w-full"
+            [class.ng-invalid]="inquiryForm.get('email')?.invalid && inquiryForm.get('email')?.touched"
+          />
+          <small 
+            class="p-error" 
+            *ngIf="inquiryForm.get('email')?.invalid && inquiryForm.get('email')?.touched">
+            {{getErrorMessage('email')}}
+          </small>
+        </div>
+      </div>
+
+      <!-- Department -->
+      <div class="field">
+        <label for="department">מחלקה *</label>
+        <p-dropdown 
+          [options]="departments" 
+          formControlName="departmentId"
+          optionLabel="name" 
+          optionValue="id"
+          placeholder="בחר מחלקה"
+          class="w-full"
+          [class.ng-invalid]="inquiryForm.get('departmentId')?.invalid && inquiryForm.get('departmentId')?.touched">
+        </p-dropdown>
+        <small 
+          class="p-error" 
+          *ngIf="inquiryForm.get('departmentId')?.invalid && inquiryForm.get('departmentId')?.touched">
+          {{getErrorMessage('departmentId')}}
+        </small>
+      </div>
+
+      <!-- Description -->
+      <div class="field">
+        <label for="description">תיאור הפנייה *</label>
+        <textarea 
+          pInputTextarea 
+          id="description" 
+          formControlName="description"
+          placeholder="אנא פרטו את נושא הפנייה..."
+          rows="4"
+          class="w-full"
+          [class.ng-invalid]="inquiryForm.get('description')?.invalid && inquiryForm.get('description')?.touched">
+        </textarea>
+        <small 
+          class="p-error" 
+          *ngIf="inquiryForm.get('description')?.invalid && inquiryForm.get('description')?.touched">
+          {{getErrorMessage('description')}}
+        </small>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="button-container">
+        <p-button 
+          type="submit" 
+          label="שלח פנייה"
+          icon="pi pi-send"
+          [loading]="isLoading"
+          loadingIcon="pi pi-spin pi-spinner"
+          [disabled]="isLoading"
+          styleClass="submit-button">
+        </p-button>
+      </div>
+    </form>
+  </p-card>
+</div>
+
+<p-toast></p-toast>
